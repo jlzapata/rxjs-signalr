@@ -14,38 +14,17 @@ Refer to the [ASP.NET SignalR docs](https://www.asp.net/signalr).
 
 ## Getting started
 
-### jQuery and Signalr
+### rxjs and Signalr
 
-This package relies on jquery and signalr packages. You will need to have both of them available to use this package.
+This package relies on signalr and rxjs packages.
 
-#### Webpack
-
-Using this package with a webpack build system you can use the provide plugin for webpack to ensure jquery is resolved correctly.
-
-```javascript
-var webpack = require('webpack');
-
-module.exports = {
-    entry: ...
-    output: ...
-    plugins: [
-        ...
-        new wepback.ProvidePlugin({
-            '$': 'jquery',
-            'window.jQuery': 'jquery',
-            'jQuery': 'jquery'
-        })
-        ...
-    ]    
-}
-```
 
 ### Install
 
 Install using npm:
 
 ```bash
-npm install rxjs-signalr --save
+npm install observable-signalr --save
 ```
 
 ### Creating a hub
@@ -53,7 +32,7 @@ npm install rxjs-signalr --save
 Create using factory method:
 
 ```javascript
-import { createSignalRHub } from 'rxjs-signalr';
+import { createSignalRHub } from 'observable-signalr';
 
 const hub = createSignalRHub('{hubName}');
 ```
@@ -61,7 +40,7 @@ const hub = createSignalRHub('{hubName}');
 Create using constructor: 
 
 ```javascript
-import { SignalRHub } from 'rxjs-signalr';
+import { SignalRHub } from 'observable-signalr';
 
 const hub = new SignalRHub('{hubName}');
 ```
@@ -69,7 +48,7 @@ const hub = new SignalRHub('{hubName}');
 ### Receiving data from SignalR
 
 ```javascript
-import { createSignalRHub } from 'rxjs-signalr';
+import { createSignalRHub } from 'observable-signalr';
 
 const hub = createSignalRHub('{hubName}');
 hub.on('{name of event/method}').subscribe(data => {
@@ -81,22 +60,9 @@ hub.start();
 ### Sending data to SignalR
 
 ```javascript
-import { createSignalRHub } from 'rxjs-signalr';
+import { createSignalRHub } from 'observable-signalr';
 
 const hub = createSignalRHub('{hubName}');
 hub.start();
 hub.send('{name of event/method}', {});
-```
-
-### Responding to connection state changes
-
-```javascript
-import { createSignalRHub } from 'rxjs-signalr';
-
-const hub = createSignalRHub('{hubName}');
-hub.start();
-hub.state$.subscribe(state => {
-    // state will be a string value of: connected, connecting, dicsonnected, reconnecting.
-    // Perform logic here
-});
 ```
