@@ -5,6 +5,8 @@ export class SignalRHub {
     private _connection: HubConnection;
     private _subjects: { [name: string]: Subject<any> };
     private _primePromise: Promise<void>;
+    private _onError: Subject<Error>;
+
 
     get connection(): HubConnection {
         return this._connection || (this._connection = this.createConnection());
@@ -18,9 +20,14 @@ export class SignalRHub {
         return this._url;
     }
 
+    get onError(): Observable<Error> {
+        return this._onError.asObservable();
+    }
+
     constructor(private _hubName: string, 
-        private _url: string = null) {
+        private _url: string) {
         this._subjects = {};
+        this._onError = new Subject<Error>();
     }
 
     start() {
@@ -61,6 +68,7 @@ export class SignalRHub {
             .withUrl(this.url)
             .build();
 
+        connection.onclose((error: Error) => this._onError.next(error));
         return connection;
     }
 }
