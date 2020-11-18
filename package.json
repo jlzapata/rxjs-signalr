@@ -1,6 +1,7 @@
 {
-  "name": "observable-signalr",
-  "version": "0.1.0",
+  "name": "@jlzapata/observable-signalr",
+  "version": "0.1.2",
+  "description": "Convert signalr library to observables",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "repository": "git+https://github.com/jlzapata/rxjs-signalr.git",

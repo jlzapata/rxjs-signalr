@@ -60,3 +60,6 @@ typings/
 **/*.js
 !karma.conf.js
 **/*.d.ts
+
+# Distribution Folder
+dist/
